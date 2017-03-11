@@ -17,37 +17,37 @@ Want to learn a bit out drag inputs and refresh on factories to crate re-usable 
 ### Basic use
 Include the js and css files in your HTML
 
-`<link rel="stylesheet" href="./Toggle.css">`
-`<script type="text/javascript" src="./Toggle.js"></script>`
+	`<link rel="stylesheet" href="./Toggle.css">`
+	`<script type="text/javascript" src="./Toggle.js"></script>`
 
 Create a dom element with className to use as a container for the switch
-`<div class="toggleContainer"></div>`
+	`<div class="toggleContainer"></div>`
 
 At the end of yuo html add a script tag, and initialise with the className of you container:
 
-`<script>
-	const myToggle = ToggleSwitch({
-		container: '.toggleContainer'
-	})
-</script>`
+	`<script>
+		const myToggle = ToggleSwitch({
+			container: '.toggleContainer'
+		})
+	</script>`
 
 Now we want it to do something, two call backs can be provided, one to run in either 'on' or 'off' state (note, off is left, on is right). Add your functions to the parameters:
 
-`<script>
-	const myToggle = ToggleSwitch({
-		container: '.toggleContainer',
-		callbask: {
-			on: () => console.log('The button is on'),
-			off: () => console.log('The button is off')
-		}
-	})
-</script>`
+	`<script>
+		const myToggle = ToggleSwitch({
+			container: '.toggleContainer',
+			callbask: {
+				on: () => console.log('The button is on'),
+				off: () => console.log('The button is off')
+			}
+		})
+	</script>`
 
 While running the button will return an object to get some feedback from the button's state. For example you can get it's active state but calling:
 
-`myToggle().get.active() // returns true or false`
+	`myToggle().get.active() // returns true or false`
 
---
+---
 
 # Config options
 Additional config options currently supported:
@@ -55,10 +55,7 @@ Additional config options currently supported:
 ### Set back ground color
 Add a color object with both or either on and off keys. All color declarations are supported (hex, rgb, rgba, names etc...)
 
-`color: {
-	on: 'green'
-	off: '#ff0000'
-}`
+	`color: { on: 'green', off: '#ff0000' }`
 
 --
 
