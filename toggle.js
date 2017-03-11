@@ -17,7 +17,7 @@ const classNames = {
 
 
 const template = props => [
-	`<div class='${classNames.track}'>`,
+	`<div class='${classNames.track}' style="background-color:${props.trackColor}">`,
 		`<div class="${classNames.target}"></div>`,
 	`</div>`,
 ].join('')
@@ -62,13 +62,18 @@ const ToggleSwitch = props => {
 		offColor: () => state.offColor
 	}
 
+	if (!!props.color) {
+		!!props.color.off ? set.offColor(props.color.off) : ''
+		!!props.color.on ? set.offColor(props.color.on) : '' 
+	}
+
 	const container = document.querySelector(props.container)
-	container.innerHTML = template()
+	container.innerHTML = template({trackColor: state.offColor})
 	const track = container.querySelector(`.${classNames.track}`)
 	const toggle = container.querySelector(`.${classNames.target}`)
 
-	!!props.color.off ? set.offColor(props.color.off) : ''
-	!!props.color.on ? set.offColor(props.color.on) : '' 
+
+	
 
 	set.toggleMargin( (track.offsetHeight - toggle.offsetHeight) / 2 )
 	set.toggleEndPosX( track.offsetWidth - toggle.offsetWidth - (state.toggleMargin * 2) )
@@ -105,7 +110,7 @@ const ToggleSwitch = props => {
 
 		if ( calcDragX < halfway ) { 
 			toggle.style.left = '0px'
-			track.style.background = ''
+			track.style.background = state.offColor
 			set.active(false)
 			if(!!props.callback.off) props.callback.off()
 			return
