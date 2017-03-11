@@ -60,6 +60,13 @@ Add a color object with both or either on and off keys. All color declarations a
 --
 
 
+----
+
+# Still to do
+
+- Full support for touch input
+- Additional themes / styles for whole 
+- Responsive design scaling
 
 
 
