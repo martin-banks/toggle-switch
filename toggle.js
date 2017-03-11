@@ -1,11 +1,14 @@
+const classNames = {
+	track: 'track',
+	target: 'target'
+}
+
 
 const template = props => [
-	`<div class='track'>`,
-		`<div class="target"></div>`,
+	`<div class='${classNames.track}'>`,
+		`<div class="${classNames.target}"></div>`,
 	`</div>`,
 ].join('')
-
-
 
 const ToggleSwitch = props => {
 	if (!props.container){
@@ -18,7 +21,11 @@ const ToggleSwitch = props => {
 		difference: null,
 		togglePosX: null,
 		toggleEndPosX: null,
-		toggleMargin: null
+		toggleMargin: null,
+
+		onColor: 'rgba(100,140,0,1)',
+		offColor: '',
+		transitionTime: 200
 	}
 	const set = {
 		status: update => state.status = update,
@@ -28,31 +35,36 @@ const ToggleSwitch = props => {
 		togglePosX: update => state.togglePosX = update,
 		toggleEndPosX: update => state.toggleEndPosX = update,
 		toggleMargin: update => state.toggleMargin = update,
+		onColor: update => state.onColor = update,
+		offColor: update => state.offColor = update
 	}
 	const get = { 
-		status: ()=> state.status,
-		dragPosX: ()=> state.dragPosX,
-		toggleStartX: ()=> state.toggleStartX,
-		difference: ()=> state.difference,
-		togglePosX: ()=> state.togglePosX,
-		toggleEndPosX: ()=> state.toggleEndPosX,
-		toggleMargin: ()=> state.toggleMargin,
+		status: () => state.status,
+		dragPosX: () => state.dragPosX,
+		toggleStartX: () => state.toggleStartX,
+		difference: () => state.difference,
+		togglePosX: () => state.togglePosX,
+		toggleEndPosX: () => state.toggleEndPosX,
+		toggleMargin: () => state.toggleMargin,
+		onColor: () => state.onColor,
+		offColor: () => state.offColor
 	}
 
 	const container = document.querySelector(props.container)
 	container.innerHTML = template()
-	const track = container.querySelector('.track')
-	const toggle = container.querySelector('.target')
+	const track = container.querySelector(`.${classNames.track}`)
+	const toggle = container.querySelector(`.${classNames.target}`)
 
 	set.toggleMargin( (track.offsetHeight - toggle.offsetHeight) / 2 )
 	set.toggleEndPosX( track.offsetWidth - toggle.offsetWidth - (state.toggleMargin * 2) )
 	toggle.addEventListener("mousedown", eleMouseDown, false);
 
 	function eleMouseDown(e) {
+		toggle.style.transition = ''
 		set.toggleStartX(e.pageX)
 		set.togglePosX(toggle.offsetLeft)
-		stateMouseDown = true;
-		document.addEventListener("mousemove", eleMouseMove, false);
+		stateMouseDown = true
+		document.addEventListener("mousemove", eleMouseMove, false)
 	}
 
 	function eleMouseMove(e) {
@@ -66,14 +78,13 @@ const ToggleSwitch = props => {
 		} else {
 			toggle.style.left = state.dragPosX - state.difference + 'px'
 		}
-		document.addEventListener("mouseup", eleMouseUp, false);
+		document.addEventListener("mouseup", eleMouseUp, false)
 	}
 
 	function eleMouseUp(e) {
-		document.removeEventListener("mousemove", eleMouseMove, false);
-		document.removeEventListener("mouseup", eleMouseUp, false);
-		
-		toggle.style.transition = 'left 0.3s'
+		document.removeEventListener("mousemove", eleMouseMove, false)
+		document.removeEventListener("mouseup", eleMouseUp, false)
+		toggle.style.transition = 'left ' + state.transitionTime/1000 + 's'
 		let calcDragX = state.dragPosX - state.difference + (toggle.offsetWidth/2) + state.toggleMargin
 		let halfway = track.offsetWidth / 2
 
@@ -81,19 +92,22 @@ const ToggleSwitch = props => {
 			toggle.style.left = '0px'
 			track.style.background = ''
 			set.status(false)
+			if(!!props.callback.off) props.callback.off()
+			return
 		} else {
 			toggle.style.left = state.toggleEndPosX + 'px'
-			track.style.background = 'rgba(100,140,0,1)'
+			track.style.background = state.onColor
 			set.status(true)
+			if(!!props.callback.on) props.callback.on()
+			return
 		}
-
-		setTimeout(() => {
-			toggle.style.transition = ''
-		}, 300)
 	}
 
 	return {
-		get: get
+		get: get,
+		set: {
+			onColor: set.onColor
+		}
 	}
 }
 
@@ -110,7 +124,7 @@ const ToggleSwitch = props => {
 	Touchscreen support
 	solution seems to work -- further testing required. 
 */
-/*let eleTouch = document.getElementsByClassName("target-touch")[0];
+/*let eleTouch = document.getElementsByClassName("target-touch")[0]
 let trackTouch = document.querySelector('.track-touch')
 
 
