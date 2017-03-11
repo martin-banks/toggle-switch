@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Toggle switch demo</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Toggle switch demo">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="./App.css">
+	</head>
+	<body>
+				
+		<h1>Toggle switch demo</h1>
+		<p>Experimenting with drag and touch-drag events and a little fun with css</p>
+
+
+		<h2>Test - drag</h2>
+		<div class="tester">
+			
+		
+		</div>
+
+
+		<div class="buttonContainer">
+			<h2>Draggable</h2>
+			<div class='track'>
+				<div class="halfway" ></div>
+				<div class="target"></div>
+			</div>
+		</div>
+
+
+
+		<div class="buttonContainer">
+			<h2>Touch enabled</h2>
+			<div class='track-touch'>
+				<div class="halfway-touch" ></div>
+				<div class="target-touch"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="./toggle.js"></script>
+	<!-- <script type="text/javascript" src="./App.js"></script> -->
+	<script>
+		let testToggle = ToggleSwitch({
+			container: '.tester'
+		})
+		console.log(testToggle)
+		
+	</script>
+
+</html>
+
+
+
+
