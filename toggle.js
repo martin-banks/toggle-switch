@@ -50,7 +50,7 @@ const ToggleSwitch = props => {
 		size: 'regular'
 	}
 
-	 /* Instantiate object with finction expressions for SETTING state values */
+	 /* Instantiate object with function expressions for SETTING state values */
 	const set = {
 		active: update => state.active = update,
 		dragPosX: update => state.dragPosX = update,
@@ -63,7 +63,7 @@ const ToggleSwitch = props => {
 		offColor: update => state.offColor = update,
 		size: update => state.size = update
 	}
-	/* Instantiate object with finction expressions for GETTING state values */
+	/* Instantiate object with function expressions for GETTING state values */
 	const get = { 
 		active: () => state.active,
 		dragPosX: () => state.dragPosX,
