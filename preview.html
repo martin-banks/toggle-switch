@@ -8,43 +8,36 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="./App.css">
 		<link rel="stylesheet" href="./Toggle.css">
+
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/tomorrow-night.min.css">
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
 	</head>
 	<body>
 				
-		<h1>Toggle switch demo</h1>
+		<h1>Toggle switch</h1>
 		<p>Experiment with drag to create a toggle switch component that can be implemented from a factory function</p>
 
-		<h2>Draggable</h2>
+		<h2>Demo</h2>
 		<div class="tester"></div>
 
+		<p>Sample config code</p>
+		<div class="configCode">
+		<pre><code class="javascript hljs">
+		</code></pre>
+			
+		</div>
 
-		<div class="buttonContainer">
+
+		<!-- <div class="buttonContainer">
 			<h2>Touch enabled</h2>
 			<div class='track-touch'>
 				<div class="halfway-touch" ></div>
 				<div class="target-touch"></div>
 			</div>
-		</div>
+		</div> -->
 	</body>
 	<script type="text/javascript" src="./Toggle.js"></script>
-	<!-- <script type="text/javascript" src="./App.js"></script> -->
-	<script>
-		const testToggle = ToggleSwitch({
-			container: '.tester',
-			callback: {
-				on: ()=>console.log('Button on'),
-				off: ()=>console.log('Button off')
-			},
-			color: {
-				off: false,
-				on: false
-			},
-			size: 'jumbo'
-		})
-
-		console.log(testToggle)
-		
-	</script>
+	<script type="text/javascript" src="./App.js"></script>
 
 </html>
 
