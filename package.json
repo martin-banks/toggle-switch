@@ -1,0 +1,20 @@
+{
+  "name": "toggle-switch",
+  "version": "1.0.0",
+  "description": "Toggle switch UI component",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martin-banks/toggle-switch.git"
+  },
+  "keywords": ["ui", "button", "swtich", "toggle"],
+  "author": "Martin Banks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martin-banks/toggle-switch/issues"
+  },
+  "homepage": "https://github.com/martin-banks/toggle-switch#readme"
+}
