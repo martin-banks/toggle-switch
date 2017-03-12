@@ -105,7 +105,10 @@ const ToggleSwitch = props => {
 
 	/* Start listening for mouse events */
 	/* Listen for mousedown events on the toggle button */
-	toggle.addEventListener("mousedown", (toggleMouseDown), false)
+	toggle.addEventListener("touchmove", toggleMouseDown, false)
+	toggle.addEventListener("touchend", toggleMouseUp, false)
+	toggle.addEventListener("mousedown", toggleMouseDown, false)
+
 
 
 	/* 
