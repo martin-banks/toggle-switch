@@ -215,11 +215,7 @@ const ToggleSwitch = props => {
 				- state.active to true
 				- call the 'on' callback supplied
 		*/
-		console.log(calcDragX , state )
 		if( state.dragPosX === state.toggleStartX){
-			console.log('same place',
-				state.dragPosX,
-				track.offsetWidth/2)
 			if(state.togglePosX < track.offsetWidth/2){
 				toggle.style.left = state.toggleEndPosX + 'px'
 				track.style.background = state.onColor
@@ -233,7 +229,7 @@ const ToggleSwitch = props => {
 				if(!!props.callback.off) props.callback.off()
 				return
 			}
-		} else if ( calcDragX < halfway ) { 
+		} else if ( calcDragX - state.toggleMargin < halfway ) { 
 			toggle.style.left = '0px'
 			track.style.background = state.offColor
 			set.active(false)
