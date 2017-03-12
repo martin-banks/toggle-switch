@@ -60,10 +60,11 @@ Add a color object with both or either on and off keys. All color declarations a
 --
 ### Set size
 Pass one of 4 different sizes as a string. The default is `regular`
-- small    ~ 35px high
-- regular  ~ 50px high
-- large    ~ 75px high
-- jumbo    ~ 100px high
+- small 		~ 35px high
+- regular 	~ 50px high
+- large			~ 75px high
+- jumbo			~ 100px high
+
 	
 	`size: 'large'`
 
