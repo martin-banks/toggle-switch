@@ -88,8 +88,9 @@ __to use:__
 
 # Still to do
 
-- Full support for touch input
+- Improve touch input
 - Additional themes / styles for whole 
+
 
 
 
