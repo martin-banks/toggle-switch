@@ -118,7 +118,8 @@ const ToggleSwitch = props => {
 			toggle position should update instantly not through animation
 		*/
 		toggle.style.transition = ''
-
+		/* store the current mouse position */
+		set.dragPosX(e.pageX)
 		/* Store the position of the mouseDown event */
 		set.toggleStartX(e.pageX)
 		/* Store the initial position of the toggle button */
@@ -132,7 +133,12 @@ const ToggleSwitch = props => {
 		set.difference(state.toggleStartX - state.togglePosX)
 		/* Now start listening for mouseMove events and call mouseMove function */
 		document.addEventListener("mousemove", toggleMouseMove, false)
+		/* start listening for mouseUp events; when the user has finished interacting */
+		document.addEventListener("mouseup", toggleMouseUp, false)
 	}
+
+
+
 
 	/* Function to perform when mouse moves while mouse is still down
 	 -- when user is 'dragging' toggle button */
@@ -162,9 +168,11 @@ const ToggleSwitch = props => {
 			*/
 			toggle.style.left = (actualPosition - state.toggleMargin) + 'px'
 		}
-		/* start listening for mouseUp events; when the user has finished interacting */
-		document.addEventListener("mouseup", toggleMouseUp, false)
+		
 	}
+
+
+
 
 
 
@@ -207,7 +215,25 @@ const ToggleSwitch = props => {
 				- state.active to true
 				- call the 'on' callback supplied
 		*/
-		if ( calcDragX < halfway ) { 
+		console.log(calcDragX , state )
+		if( state.dragPosX === state.toggleStartX){
+			console.log('same place',
+				state.dragPosX,
+				track.offsetWidth/2)
+			if(state.togglePosX < track.offsetWidth/2){
+				toggle.style.left = state.toggleEndPosX + 'px'
+				track.style.background = state.onColor
+				set.active(true)
+				if(!!props.callback.on) props.callback.on()
+				return
+			} else {
+				toggle.style.left = '0px'
+				track.style.background = state.offColor
+				set.active(false)
+				if(!!props.callback.off) props.callback.off()
+				return
+			}
+		} else if ( calcDragX < halfway ) { 
 			toggle.style.left = '0px'
 			track.style.background = state.offColor
 			set.active(false)
