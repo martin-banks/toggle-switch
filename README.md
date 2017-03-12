@@ -53,7 +53,10 @@ Now we want it to do something, two call backs can be provided, one to run in ei
 
 While running the button will return an object to get some feedback from the button's state. For example you can get it's active state but calling:
 
-`myToggle().get.active() // returns true or false`
+	`myToggle().get.active() // returns true or false`
+
+
+
 
 ---
 
@@ -67,14 +70,19 @@ Add a color object with both or either on and off keys. All color declarations a
 
 --
 ### Set size
-Pass one of 4 different sizes as a string under a size key. The default is `regular`
+Pass one of 4 different sizes as a string under a size key. 
+The default is `regular`
 
-- Small 		~ 35px high
-- Regular 	~ 50px high
-- Large			~ 75px high
-- Jumbo			~ 100px high
+__options__
 
-		size: 'large'
+	- Small 		~ 35px high
+	- Regular 	~ 50px high
+	- Large			~ 75px high
+	- Jumbo			~ 100px high
+
+__to use:__
+
+	size: 'large'
 
 --
 
@@ -83,6 +91,7 @@ Pass one of 4 different sizes as a string under a size key. The default is `regu
 - Add click to toggle suppport
 - Full support for touch input
 - Additional themes / styles for whole 
+
 
 
 
