@@ -1,14 +1,3 @@
-/*
-props: {
-	container: '.someClassName',
-	callback: {
-		on: ()=>,
-		off= ()=>
-	}
-}
-
-*/
-
 
 const classNames = {
 	track: 'track',
@@ -17,8 +6,10 @@ const classNames = {
 
 
 const template = props => [
-	`<div class='${classNames.track}' style="background-color:${props.trackColor}">`,
-		`<div class="${classNames.target}"></div>`,
+	`<div class="${props.size}">`,
+		`<div class='${classNames.track}' style="background-color:${props.trackColor}">`,
+			`<div class="${classNames.target}"></div>`,
+		`</div>`,
 	`</div>`,
 ].join('')
 
@@ -37,7 +28,8 @@ const ToggleSwitch = props => {
 
 		onColor: 'rgba(100,140,0,1)',
 		offColor: '',
-		transitionTime: 200
+		transitionTime: 200,
+		size: 'regular'
 	}
 	const set = {
 		active: update => state.active = update,
@@ -48,7 +40,8 @@ const ToggleSwitch = props => {
 		toggleEndPosX: update => state.toggleEndPosX = update,
 		toggleMargin: update => state.toggleMargin = update,
 		onColor: update => state.onColor = update,
-		offColor: update => state.offColor = update
+		offColor: update => state.offColor = update,
+		size: update => state.size = update
 	}
 	const get = { 
 		active: () => state.active,
@@ -59,7 +52,8 @@ const ToggleSwitch = props => {
 		toggleEndPosX: () => state.toggleEndPosX,
 		toggleMargin: () => state.toggleMargin,
 		onColor: () => state.onColor,
-		offColor: () => state.offColor
+		offColor: () => state.offColor,
+		size: () => state.size
 	}
 
 	if (!!props.color) {
@@ -67,14 +61,17 @@ const ToggleSwitch = props => {
 		!!props.color.on ? set.offColor(props.color.on) : '' 
 	}
 
+	!!props.size ? set.size(props.size) : ''
+
 	const container = document.querySelector(props.container)
-	container.innerHTML = template({trackColor: state.offColor})
+	container.innerHTML = template({
+		trackColor: state.offColor,
+		size: state.size
+	})
+	
 	const track = container.querySelector(`.${classNames.track}`)
 	const toggle = container.querySelector(`.${classNames.target}`)
-
-
 	
-
 	set.toggleMargin( (track.offsetHeight - toggle.offsetHeight) / 2 )
 	set.toggleEndPosX( track.offsetWidth - toggle.offsetWidth - (state.toggleMargin * 2) )
 	toggle.addEventListener("mousedown", eleMouseDown, false);
@@ -87,24 +84,26 @@ const ToggleSwitch = props => {
 		document.addEventListener("mousemove", eleMouseMove, false)
 	}
 
+
 	function eleMouseMove(e) {
 		set.dragPosX(e.pageX)
 		set.difference(state.toggleStartX - state.togglePosX)
-	
 		if (state.dragPosX - state.difference <= 0) {
 			toggle.style.left = '0px'		
-		} else if ( (state.dragPosX - state.difference + state.toggleMargin) > state.toggleEndPosX) {
+		} else if ( (state.dragPosX - state.difference - state.toggleMargin) > state.toggleEndPosX) {
 			toggle.style.left = state.toggleEndPosX + 'px'	
 		} else {
-			toggle.style.left = state.dragPosX - state.difference + 'px'
+			toggle.style.left = (state.dragPosX - state.difference - state.toggleMargin) + 'px'
 		}
 		document.addEventListener("mouseup", eleMouseUp, false)
 	}
+
 
 	function eleMouseUp(e) {
 		document.removeEventListener("mousemove", eleMouseMove, false)
 		document.removeEventListener("mouseup", eleMouseUp, false)
 		toggle.style.transition = 'left ' + state.transitionTime/1000 + 's'
+		
 		let calcDragX = state.dragPosX - state.difference + (toggle.offsetWidth/2) + state.toggleMargin
 		let halfway = track.offsetWidth / 2
 
@@ -161,7 +160,8 @@ eleTouch.addEventListener('touchend', (e)=>{
 	eleTouch.style.transition = 'left 0.3s'
 	//console.log(eleTouch.offsetLeft)
 	
-	if ((eleTouch.offsetLeft +(eleTouch.offsetWidth/2)) < (trackTouch.offsetWidth/2)) { // need to detect center point
+	if ((eleTouch.offsetLeft +(eleTouch.offsetWidth/2)) < (trackTouch.offsetWidth/2)) { 
+	// need to detect center point
 		eleTouch.style.left = '0px'
 		trackTouch.style.background = ''
 	} else {

@@ -1,36 +1,121 @@
-
-.track,
-.track-touch {
-	transition: background 0.5s, background-color 0.5s;
-  position: relative;
-  display: inline-block;
-  width: 200px;
-  height: 100px;
-  background-color: rgba(0,0,0,0.2);
-  margin: 20px auto;
-	border-radius: 50px;
-	overflow: hidden;
-	box-sizing: border-box;
-	box-shadow: inset 0 4px 2px rgba(0,0,0,0.4), 0 1px 1px rgba(255,255,255,0.4)
-}
 .halfway,
-.halfway-touch {
+.halfway-touch{
   position: absolute;
 	top: 0;
 	left: 0;
   width: 50%;
   height: 100%;
 }
+.track,
+.track-touch{
+	transition: background 0.5s, background-color 0.5s;
+  position: relative;
+  display: inline-block;
+  background-color: rgba(0,0,0,0.2);
+	overflow: hidden;
+	box-sizing: border-box;
+	border-radius: 100px;
+}
+
 .target,
-.target-touch {
-  height: 80px;
-  width: 80px;
-	margin: 10px;
+.target-touch{
   background: #fff;
   position: absolute;
   cursor: pointer;
-	border-radius: 50px;
 	box-sizing: border-box; 
+	border-radius: 100px;
+}
+
+
+
+
+/*SMALL SIZE*/
+.small .track,
+.small .track-touch{
+  width: 60px;
+  height: 35px;
+  margin: 5px auto;
+	box-shadow: inset 0 2px 1px rgba(0,0,0,0.4), 
+		0 1px 1px rgba(255,255,255,0.4)
+}
+
+.small .target,
+.small .target-touch{
+  height: 29px;
+  width: 29px;
+	margin: 3px;
+	box-shadow: 0px 8px 8px -4px rgba(0,0,0,0.6), 
+		inset 0 -8px 12px 6px rgba(0,0,0,0.5),
+		inset 0 4px 2px 4px rgba(255,255,255,1),
+		inset 0 -2px 2px 0 rgba(0,0,0,1)
+}
+
+
+
+
+/*REGULAR SIZE*/
+.regular .track,
+.regular .track-touch{
+  width: 100px;
+  height: 50px;
+  margin: 10px auto;
+	box-shadow: inset 0 2px 1px rgba(0,0,0,0.4), 
+		0 1px 1px rgba(255,255,255,0.4)
+}
+
+.regular .target,
+.regular .target-touch{
+  height: 40px;
+  width: 40px;
+	margin: 5px;
+	box-shadow: 0px 8px 8px -4px rgba(0,0,0,0.6), 
+		inset 0 -8px 12px 6px rgba(0,0,0,0.5),
+		inset 0 4px 2px 4px rgba(255,255,255,1),
+		inset 0 -2px 2px 0 rgba(0,0,0,1)
+}
+
+
+
+
+/*LARGE SIZE*/
+.large .track,
+.large .track-touch{
+  width: 150px;
+  height: 75px;
+  margin: 10px auto;
+	box-shadow: inset 0 2px 1px rgba(0,0,0,0.4), 
+		0 1px 1px rgba(255,255,255,0.4)
+}
+
+.large .target,
+.large .target-touch{
+  height: 59px;
+  width: 59px;
+	margin: 8px;
+	box-shadow: 0px 8px 8px -4px rgba(0,0,0,0.6), 
+		inset 0 -8px 12px 6px rgba(0,0,0,0.5),
+		inset 0 4px 2px 4px rgba(255,255,255,1),
+		inset 0 -2px 2px 0 rgba(0,0,0,1)
+}
+
+
+
+
+
+/* JUMBO SIZE */
+.jumbo .track,
+.jumbo .track-touch{
+  width: 200px;
+  height: 100px;
+  margin: 20px auto;
+	box-shadow: inset 0 4px 2px rgba(0,0,0,0.4), 0 1px 1px rgba(255,255,255,0.4)
+}
+
+.jumbo .target,
+.jumbo .target-touch{
+  height: 80px;
+  width: 80px;
+	margin: 10px;
 	box-shadow: 0px 16px 16px -8px rgba(0,0,0,0.6), 
 		inset 0 -16px 24px 12px rgba(0,0,0,0.5),
 		inset 0 8px 4px 8px rgba(255,255,255,1),

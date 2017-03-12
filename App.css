@@ -5,10 +5,18 @@ body {
 	text-align: center;
 	font-family: sans-serif
 }
+* {
+	position: relative;
+	transform-origin: 0 0;
+	margin: 0;
+}
 h1, h2, p {
 	color: #888;
 	font-weight: 100;
 	letter-spacing: 1px;
+	margin: 20px auto;
+}
+p{
 }
 h1 {
 	margin: 0 auto;
@@ -19,4 +27,11 @@ h1 {
 .buttonContainer {
 	display: inline-block;
 	margin: 50px
+}
+
+.tester {
+	position: relative;
+	display: block;
+	width: 100%;
+	margin: 0 auto;
 }

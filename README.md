@@ -52,13 +52,20 @@ While running the button will return an object to get some feedback from the but
 # Config options
 Additional config options currently supported:
 
-### Set back ground color
+### Set background color
 Add a color object with both or either on and off keys. All color declarations are supported (hex, rgb, rgba, names etc...)
 
 	`color: { on: 'green', off: '#ff0000' }`
 
 --
-
+### Set size
+Pass one of 4 different sizes as a string. The default is `regular`
+- small    ~ 35px high
+- regular  ~ 50px high
+- large    ~ 75px high
+- jumbo    ~ 100px high
+	
+	`size: 'large'`
 
 ----
 
@@ -66,7 +73,6 @@ Add a color object with both or either on and off keys. All color declarations a
 
 - Full support for touch input
 - Additional themes / styles for whole 
-- Responsive design scaling
 
 
 
