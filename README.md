@@ -88,7 +88,6 @@ __to use:__
 
 # Still to do
 
-- Add click to toggle suppport
 - Full support for touch input
 - Additional themes / styles for whole 
 
