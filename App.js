@@ -9,7 +9,8 @@ const toggleOptions = {
 		off: false,
 		on: false
 	},
-	size: 'jumbo'
+	size: 'regular',
+	theme: 'flat'
 }
 const testToggle = ToggleSwitch(toggleOptions)
 

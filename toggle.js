@@ -41,11 +41,14 @@ const classNames = {
 	ES6 string template returns the tempalte with configurable options
 */
 const template = props => `
-	<div class="${props.size}">
-		<div class='${classNames.track}' style="background-color:${props.trackColor}">
-			<div class="${classNames.target}"></div>
+	<div class="${props.theme}">
+		<div class="${props.size}">
+			<div class='${classNames.track}' style="background-color:${props.trackColor}">
+				<div class="${classNames.target}"></div>
+			</div>
 		</div>
-	</div>`
+	</div>
+`
 
 
 
@@ -71,10 +74,11 @@ const ToggleSwitch = props => {
 		togglePosX: null,
 		toggleEndPosX: null,
 		toggleMargin: null,
-		onColor: 'rgba(100,140,0,1)',
+		onColor: 'rgba(100,140,0,0.6)',
 		offColor: '',
 		transitionTime: 200,
-		size: 'regular'
+		size: 'regular',
+		theme: ''
 	}
 
 	 /* Instantiate object with function expressions for SETTING state values */
@@ -88,7 +92,8 @@ const ToggleSwitch = props => {
 		toggleMargin: update => state.toggleMargin = update,
 		onColor: update => state.onColor = update,
 		offColor: update => state.offColor = update,
-		size: update => state.size = update
+		size: update => state.size = update,
+		theme: update => state.theme = update
 	}
 	/* Instantiate object with function expressions for GETTING state values */
 	const get = { 
@@ -109,15 +114,22 @@ const ToggleSwitch = props => {
 		!!props.color.off ? set.offColor(props.color.off) : ''
 		!!props.color.on ? set.offColor(props.color.on) : '' 
 	}
+
+	/* Check if a style has bee assigned */
+	set.theme(props.theme || '')
+	
+	
 	/* check for size options on props, update state if needed */
 	!!props.size ? set.size(props.size) : ''
 
 	/* store container object as described by props in variable */
 	const container = document.querySelector(props.container)
+	
 	/* render toggle template into container */
 	container.innerHTML = template({
 		trackColor: state.offColor,
-		size: state.size
+		size: state.size,
+		theme: state.theme
 	})
 	
 	/* store track and toggle elements for reference later */

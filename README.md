@@ -1,22 +1,31 @@
 # toggle-switch
-Self-set challenge project
+Self-set challenge
 
 ### The brief
-Create a re-usable template/component fora toggle switch. It must:
+Create a re-usable UI template/component for a toggle switch. It must:
+
 - Respond to drag events, for both mouse and touch input
 - Make use of a factory function
-- Perform a different function in on/off state 
+- Perform a different function in on/off state
+- Additional configuration options 
 
 **Extra credit**
 
-- Additional configuration options
 - Creat a version using ES6 classes
-
+- Add some tests ...
 
 
 
 ### Why?
-I want to learn about drag inputs and refresh on factories to crate re-usable componenets
+I want to learn about drag inputs and refresh kowledge of factories to crate re-usable componenets
+
+
+
+### What is it?
+A resusable UI component for a toggle switch that returns a boolean value and executes different function based on it's status.
+
+Styling will will work on both light, dark backgrounds
+
 
 
 ## How to
@@ -31,7 +40,7 @@ Create a dom element with className to use as a container for the switch
 
 	<div class="toggleContainer"></div>
 
-At the end of yuo html add a script tag, and initialise with the className of you container:
+At the end of your html add a script tag, and initialise with the className of you container:
 
 	<script>
 		const myToggle = ToggleSwitch({
