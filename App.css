@@ -10,6 +10,9 @@ body {
 	transform-origin: 0 0;
 	margin: 0;
 }
+pre, code {
+	text-align: left;
+}
 h1, h2, p {
 	color: #888;
 	font-weight: 100;
