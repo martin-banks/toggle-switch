@@ -85,7 +85,7 @@ The default is `regular`
 __options__
 
 	- Small			~ 35px high
-	- Regular 		~ 50px high
+	- Regular		~ 50px high
 	- Large			~ 75px high
 	- Jumbo			~ 100px high
 
