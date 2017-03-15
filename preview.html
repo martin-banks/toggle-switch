@@ -13,32 +13,41 @@
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
 	</head>
 	<body>
-				
-		<h1>Toggle switch</h1>
-		<p>Experiment with drag to create a toggle switch component that can be implemented from a factory function</p>
+		<section id="demoContainer">
+			<h1>Toggle switch</h1>
+			<p>Vanilla JS component to render a toggle switch and run a different function in either state</p>
 
-		<h2>Demo</h2>
-		<div class="tester"></div>
+			<div class="tester"></div>	
 
-		<p>Sample config code</p>
+		</section>
 		<div class="configCode">
-		<pre>
-			<code class="javascript hljs">
-const toggleOptions = {
-	container: '.tester',
-	callback: {
-		on: ()=> console.log('Button on'),
-		off: ()=> console.log('Button off')
-	},
-	color: {
-		off: false,
-		on: false
-	},
-	size: 'jumbo' // 'small', 'regular', 'large', 'jumbo'
-}
-			</code>
-		</pre>
-			
+			<pre>
+				<code class="javascript hljs">
+	// Sample usage code
+	// Config options
+	const toggleOptions = {
+	  container: '.tester',
+	  callback: {
+	    on: ()=> console.log('Button on'),
+	    off: ()=> console.log('Button off')
+	  },
+	  color: {
+	    off: false,
+	    on: false
+	  },
+	  size: 'jumbo', // 'small', 'regular', 'large', 'jumbo'
+	  theme: 'flat'
+	}
+
+	// Instantiate new button
+	const myToggle = ToggleSwitch(toggleOptions)
+
+	// A new toggle will render into the target div
+
+	// Get the status of the button
+	myToggle.get.active() // true || false
+				</code>
+			</pre>
 		</div>
 
 	</body>
