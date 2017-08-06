@@ -1,7 +1,8 @@
 body {
   padding: 0px;
   margin: 0 auto;
-	background: #1d1f21;
+	/*background: #1d1f21;*/
+	/*background: #222;*/
 	text-align: center;
 	font-family: sans-serif
 }
@@ -11,7 +12,7 @@ body {
 	margin: 0;
 }
 section#demoContainer {
-	background-color: #fff;
+	background-color: #1d1f21;
 	padding: 20px 0;
 }
 pre, code {

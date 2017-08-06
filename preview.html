@@ -28,21 +28,19 @@
 	const toggleOptions = {
 	  container: '.tester',
 	  callback: {
-	    on: ()=> console.log('Button on'),
-	    off: ()=> console.log('Button off')
+	    on: () => console.log('Button on'),
+	    off: () => console.log('Button off'),
 	  },
 	  color: {
 	    off: false,
-	    on: false
+	    on: false,
 	  },
 	  size: 'jumbo', // 'small', 'regular', 'large', 'jumbo'
-	  theme: 'flat'
+	  theme: 'flat',
 	}
 
-	// Instantiate new button
+	// Create a new toggle switch and render to DOM target
 	const myToggle = ToggleSwitch(toggleOptions)
-
-	// A new toggle will render into the target div
 
 	// Get the status of the button
 	myToggle.get.active() // true || false

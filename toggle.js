@@ -23,22 +23,20 @@ SOFTWARE.
 
 */
 
-
-
 /*
-	Define class names used in template structure 
-	These are used to get and update elements without 
-	needing to perform much DOM interigation  
+	Define class names used in template structure
+	These are used to get and update elements without
+	needing to perform much DOM interigation 
 */
 const classNames = {
 	track: 'track',
-	target: 'target'
+	target: 'target',
 }
 
 
 /*
 	HTML Template
-	ES6 string template returns the tempalte with configurable options
+	ES6 string template returns the template with configurable options
 */
 const template = props => `
 	<div class="${props.theme}">
@@ -51,20 +49,18 @@ const template = props => `
 `
 
 
-
-/* 
-	Main toggle switch 
+/*
+	Main toggle switch
 	'props' is a paramter object, only the container is a required value
-	Details of other options are in the README.md 
+	Details of other options are in the README.md
 */
-const ToggleSwitch = props => {
-	/* 
-		Check for required arguments before app to render starts
-	*/
-	if (!props.container){
+
+// Check for required arguments before app to render starts
+function ToggleSwitch(props) {
+	if (!props.container) {
 		return console.error('A string selector for the toggle container is required')
 	}
-	
+
 	/* Instantiate state obj, all options and value are referenced from here*/
 	let	state = {
 		active: false,
@@ -78,10 +74,10 @@ const ToggleSwitch = props => {
 		offColor: '',
 		transitionTime: 200,
 		size: 'regular',
-		theme: ''
+		theme: '',
 	}
 
-	 /* Instantiate object with function expressions for SETTING state values */
+  // function expressions for SETTING state values
 	const set = {
 		active: update => state.active = update,
 		dragPosX: update => state.dragPosX = update,
@@ -93,10 +89,10 @@ const ToggleSwitch = props => {
 		onColor: update => state.onColor = update,
 		offColor: update => state.offColor = update,
 		size: update => state.size = update,
-		theme: update => state.theme = update
+		theme: update => state.theme = update,
 	}
-	/* Instantiate object with function expressions for GETTING state values */
-	const get = { 
+	// function expressions for GETTING state values
+	const get = {
 		active: () => state.active,
 		dragPosX: () => state.dragPosX,
 		toggleStartX: () => state.toggleStartX,
@@ -106,59 +102,55 @@ const ToggleSwitch = props => {
 		toggleMargin: () => state.toggleMargin,
 		onColor: () => state.onColor,
 		offColor: () => state.offColor,
-		size: () => state.size
+		size: () => state.size,
 	}
 
-	/* check for color options in props, update state if needed */
+	// check for color options in props, update state if needed
 	if (!!props.color) {
 		!!props.color.off ? set.offColor(props.color.off) : ''
-		!!props.color.on ? set.offColor(props.color.on) : '' 
+		!!props.color.on ? set.offColor(props.color.on) : ''
 	}
 
 	/* Check if a style has bee assigned */
 	set.theme(props.theme || '')
-	
-	
+
+
 	/* check for size options on props, update state if needed */
 	!!props.size ? set.size(props.size) : ''
 
 	/* store container object as described by props in variable */
 	const container = document.querySelector(props.container)
-	
+
 	/* render toggle template into container */
 	container.innerHTML = template({
 		trackColor: state.offColor,
 		size: state.size,
-		theme: state.theme
+		theme: state.theme,
 	})
-	
+
 	/* store track and toggle elements for reference later */
 	const track = container.querySelector(`.${classNames.track}`)
 	const toggle = container.querySelector(`.${classNames.target}`)
-	
+
 	/* store the toggle's margin in state by calculating difference bwteen it's height and the track height */
-	set.toggleMargin( (track.offsetHeight - toggle.offsetHeight) / 2 )
-	
+	set.toggleMargin((track.offsetHeight - toggle.offsetHeight) / 2)
+
 	/* store the furthest position (on position) in state by subtracting the toggle width from the track */
-	set.toggleEndPosX( track.offsetWidth - toggle.offsetWidth - (state.toggleMargin * 2) )
+	set.toggleEndPosX(track.offsetWidth - toggle.offsetWidth - (state.toggleMargin * 2))
 
 	/* Start listening for mouse events */
 	/* Listen for mousedown events on the toggle button */
-	toggle.addEventListener("touchmove", toggleMouseDown, false)
-	toggle.addEventListener("touchend", toggleMouseUp, false)
-	toggle.addEventListener("mousedown", toggleMouseDown, false)
+	toggle.addEventListener('touchmove', toggleMouseDown, false)
+	toggle.addEventListener('touchend', toggleMouseUp, false)
+	toggle.addEventListener('mousedown', toggleMouseDown, false)
 
 
+	// Function to perform on mousedown
+	// when user first starts interacting with toggle by pressing down on mouse button
 
-	/* 
-		Function to perform on mousedown 
-		-- when user first starts interacting with toggle by pressing down on mouse button
-	*/
 	function toggleMouseDown(e) {
-		/* 
-			Remove toggle button transition values for smooth draggin
-			toggle position should update instantly not through animation
-		*/
+		// Remove toggle button transition values for smooth draggin
+		// toggle position should update instantly not through animation
 		toggle.style.transition = ''
 		/* store the current mouse position */
 		set.dragPosX(e.pageX)
@@ -166,28 +158,25 @@ const ToggleSwitch = props => {
 		set.toggleStartX(e.pageX)
 		/* Store the initial position of the toggle button */
 		set.togglePosX(toggle.offsetLeft)
-		/* 
+		/*
 			Store the difference of mouseDown position to the toggle button position.
 			This is used later to calculate the exact position to move the button to.
-				eg: if the user clicks in the middle of the button we want to the middle of the button to 
+				eg: if the user clicks in the middle of the button we want to the middle of the button to
 				stay aligned to the mouse cursor, not for it jump to align the left edge.
 		*/
 		set.difference(state.toggleStartX - state.togglePosX)
 		/* Now start listening for mouseMove events and call mouseMove function */
-		document.addEventListener("mousemove", toggleMouseMove, false)
+		document.addEventListener('mousemove', toggleMouseMove, false)
 		/* start listening for mouseUp events; when the user has finished interacting */
-		document.addEventListener("mouseup", toggleMouseUp, false)
+		document.addEventListener('mouseup', toggleMouseUp, false)
 	}
-
-
-
 
 	/* Function to perform when mouse moves while mouse is still down
 	 -- when user is 'dragging' toggle button */
 	function toggleMouseMove(e) {
 		/* continually store the current mouse position */
 		set.dragPosX(e.pageX)
-		/* calculate the exact drag position based on it's drag position 
+		/* calculate the exact drag position based on it's drag position
 			less the difference of where the user clicked to start the drag */
 		const actualPosition = state.dragPosX - state.difference
 		/*
@@ -200,50 +189,44 @@ const ToggleSwitch = props => {
 			ELSE - is dragging within the track, update to current drag position
 		*/
 		if (actualPosition <= 0) {
-			toggle.style.left = '0px'		
-		} else if ( (actualPosition - state.toggleMargin) > state.toggleEndPosX) {
-			toggle.style.left = state.toggleEndPosX + 'px'	
+			toggle.style.left = '0px'
+		} else if ((actualPosition - state.toggleMargin) > state.toggleEndPosX) {
+			toggle.style.left = state.toggleEndPosX + 'px'
 		} else {
-			/* 
-				The toggle button has a margin to provide some space between it and the edges of the track, 
+			/*
+				The toggle button has a margin to provide some space between it and the edges of the track,
 				we must subtract this from the position calculation to prevent it going too far
 			*/
-			toggle.style.left = (actualPosition - state.toggleMargin) + 'px'
+			toggle.style.left = `${actualPosition - state.toggleMargin}px`
 		}
-		
 	}
-
-
-
-
-
 
 	/*
 		Function to perform when mouse button is released
 		-- user has finisehed interacting with button
 	*/
 	function toggleMouseUp(e) {
-		/* 
+		/*
 			Remove eventListeners for mousemove and mouseup; user has finished this interaction session.
 			We add these event listeners again if the user starts another interaction session
 		 */
-		document.removeEventListener("mousemove", toggleMouseMove, false)
-		document.removeEventListener("mouseup", toggleMouseUp, false)
+		document.removeEventListener('mousemove', toggleMouseMove, false)
+		document.removeEventListener('mouseup', toggleMouseUp, false)
 
-		/* 
+		/*
 			Add css transition so the toggle moves smoothly if not dragged the full distance
 			Transition time is stored as milliseconds in state
 		 */
-		toggle.style.transition = 'left ' + state.transitionTime + 'ms'
-		
-		/* 
+		toggle.style.transition = `left${state.transitionTime}ms`
+
+		/*
 			Calculate where the button was dragged to.
 			Get the dragged position, subtract the 'difference' of the cursor position to the toggle position
 		*/
-		let calcDragX = state.dragPosX - state.difference + (toggle.offsetWidth/2) + state.toggleMargin
+		const calcDragX = (state.dragPosX - state.difference) + (toggle.offsetWidth / 2) + state.toggleMargin
 
 		/* Calculate the halfway point; half the width of the track */
-		let halfway = track.offsetWidth / 2
+		const halfway = track.offsetWidth / 2
 
 		/* IF toggle poistion is less than halfway then set toggle to it's off position
 				- the toggle to the left side 
@@ -257,46 +240,41 @@ const ToggleSwitch = props => {
 				- state.active to true
 				- call the 'on' callback supplied
 		*/
-		if( state.dragPosX === state.toggleStartX){
-			if(state.togglePosX < track.offsetWidth/2){
-				toggle.style.left = state.toggleEndPosX + 'px'
+		if (state.dragPosX === state.toggleStartX) {
+			if (state.togglePosX < track.offsetWidth / 2) {
+				toggle.style.left = `${state.toggleEndPosX}px`
 				track.style.background = state.onColor
 				set.active(true)
-				if(!!props.callback.on) props.callback.on()
-				return
+				if (!!props.callback.on) props.callback.on()
 			} else {
 				toggle.style.left = '0px'
 				track.style.background = state.offColor
 				set.active(false)
-				if(!!props.callback.off) props.callback.off()
-				return
+				if (!!props.callback.off) props.callback.off()
 			}
-		} else if ( calcDragX - state.toggleMargin < halfway ) { 
+		} else if (calcDragX - state.toggleMargin < halfway) {
 			toggle.style.left = '0px'
 			track.style.background = state.offColor
 			set.active(false)
-			if(!!props.callback.off) props.callback.off()
-			return
+			if (!!props.callback.off) props.callback.off()
 		} else {
-			toggle.style.left = state.toggleEndPosX + 'px'
+			toggle.style.left = `${state.toggleEndPosX}px`
 			track.style.background = state.onColor
 			set.active(true)
-			if(!!props.callback.on) props.callback.on()
-			return
+			if (!!props.callback.on) props.callback.on()
 		}
 	}
 
 
-	/* 
-		Return an object when the toggle button is initialised: 
-			- all functions to get state values.  
-					example: get.active() // returns true of false boolean 
+	/*
+		Return an object when the toggle button is initialised:
+			- all functions to get state values.
+					example: get.active() // returns true of false boolean
 	*/
 	return {
-		get: get,
+		get,
 	}
 }
-
 
 
 
